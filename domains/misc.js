@@ -17,8 +17,8 @@ const routes = [
   // Insurances
   { method: 'GET', pattern: '/api/v1/insurances/all', async handler(req, res) {
     json(res, 200, { data: [
-      { id: 1, name: "Uniodonto", type: "Odontológico" }, { id: 2, name: "Amil Dental", type: "Odontológico" },
-      { id: 3, name: "Bradesco Dental", type: "Odontológico" }, { id: 4, name: "SulAmérica Odonto", type: "Odontológico" },
+      { id: 1, name: "Uniodonto", type: "Odontológico", status: true }, { id: 2, name: "Amil Dental", type: "Odontológico", status: true },
+      { id: 3, name: "Bradesco Dental", type: "Odontológico", status: true }, { id: 4, name: "SulAmérica Odonto", type: "Odontológico", status: true },
     ]});
   }},
 

@@ -2,8 +2,8 @@ const { json, readBody } = require('../lib/helpers');
 const { broadcastSSE } = require('../lib/sse');
 
 const appointments = [
-  { id: 1, patientId: 1, patientName: "João Batista de Souza", patientPhone: "(11) 98765-4321", cpf: "123.456.789-00", doctorId: 1, doctorName: "Dra. Maria da Costa", doctor: "Dra. Maria da Costa", duration: 30, appointmentDate: "2026-06-18", startTime: "09:00:00", endTime: "09:30:00", status: "AGENDADO", reason: "Consulta de rotina", notes: null, dentalOfficeId: 1 },
-  { id: 2, patientId: 2, patientName: "Maria Aparecida Santos", patientPhone: "(11) 97654-3210", cpf: "987.654.321-00", doctorId: 2, doctorName: "Dr. Carlos Oliveira", doctor: "Dr. Carlos Oliveira", duration: 45, appointmentDate: "2026-06-18", startTime: "10:00:00", endTime: "10:45:00", status: "CONFIRMADO", reason: "Canal", notes: null, dentalOfficeId: 1 },
+  { id: 1, patientId: 1, patientName: "João Batista de Souza", patientPhone: "(11) 98765-4321", cpf: "123.456.789-00", doctorId: 1, doctorName: "Dra. Maria da Costa", doctor: "Dra. Maria da Costa", duration: 30, appointmentDate: "2026-06-25", startTime: "09:00:00", endTime: "09:30:00", status: "AGENDADO", reason: "Consulta de rotina", notes: null, dentalOfficeId: 1 },
+  { id: 2, patientId: 2, patientName: "Maria Aparecida Santos", patientPhone: "(11) 97654-3210", cpf: "987.654.321-00", doctorId: 2, doctorName: "Dr. Carlos Oliveira", doctor: "Dr. Carlos Oliveira", duration: 45, appointmentDate: "2026-06-25", startTime: "10:00:00", endTime: "10:45:00", status: "CONFIRMADO", reason: "Canal", notes: null, dentalOfficeId: 1 },
 ];
 let appointmentIdSeq = 100;
 
@@ -41,7 +41,16 @@ const routes = [
   }},
 
   { method: 'GET', pattern: '/api/v1/appointments/range', async handler(req, res) {
-    json(res, 200, appointments);
+    const url = new URL(req.url, `http://${req.headers.host}`);
+    const start = url.searchParams.get('start');
+    const end = url.searchParams.get('end');
+    
+    const filtered = appointments.filter(app => {
+      if (!start || !end) return true;
+      return app.appointmentDate >= start && app.appointmentDate <= end;
+    });
+    
+    json(res, 200, filtered);
   }},
 
   { method: 'GET', pattern: '/api/v1/appointments/:id', async handler(req, res, params) {
