@@ -28,7 +28,7 @@ const routes = [
       'Access-Control-Allow-Origin': '*',
       'Access-Control-Allow-Headers': 'Authorization, X-Dental-Office-Id',
     });
-    res.write(`data: {"action":"CONNECTED","message":"Conectado ao servidor mock"}\n\n`);
+    res.write(`event: appointment\ndata: {"action":"CONNECTED","message":"Conectado ao servidor mock"}\n\n`);
     addClient(res);
     req.on('close', () => removeClient(res));
   }},

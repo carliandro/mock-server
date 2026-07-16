@@ -61,5 +61,5 @@ server.listen(PORT, () => {
 });
 
 setInterval(() => {
-  broadcastSSE({ action: 'heartbeat', timestamp: Date.now() });
+  broadcastSSE({ action: 'heartbeat', timestamp: Date.now() }, 'heartbeat');
 }, SSE_HEARTBEAT_MS);
