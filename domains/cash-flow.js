@@ -29,7 +29,8 @@ const routes = [
     const idx = cashFlow.findIndex(o => o.id === Number(params.id));
     if (idx === -1) { json(res, 404, { error: 'Not found' }); return; }
     cashFlow.splice(idx, 1);
-    json(res, 204);
+    res.writeHead(204, { 'Access-Control-Allow-Origin': '*' });
+    res.end();
   }},
 ];
 

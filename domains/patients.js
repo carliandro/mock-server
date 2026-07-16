@@ -58,7 +58,16 @@ const routes = [
     const idx = patients.findIndex(p => p.id === Number(params.id));
     if (idx === -1) { json(res, 404, { error: 'Not found' }); return; }
     patients.splice(idx, 1);
-    json(res, 204);
+    res.writeHead(204, { 'Access-Control-Allow-Origin': '*' });
+    res.end();
+  }},
+  { method: 'POST', pattern: '/api/v1/patients/:id/photo', async handler(req, res, params) {
+    const pt = patients.find(p => p.id === Number(params.id));
+    if (!pt) { json(res, 404, { error: 'Not found' }); return; }
+    const body = await readBody(req);
+    pt.photo = body.base64 || pt.photo;
+    res.writeHead(204, { 'Access-Control-Allow-Origin': '*' });
+    res.end();
   }},
 ];
 

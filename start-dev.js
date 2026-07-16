@@ -96,7 +96,7 @@ setTimeout(() => {
     }
 
     const ng = startProcess('Angular', 'npx', [
-      'ng', 'serve',
+      'ng', 'serve', '--configuration', 'development',
     ], { cwd: FRONTEND });
 
     function cleanup() {

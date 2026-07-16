@@ -13,7 +13,7 @@ const routes = [
     json(res, 200, { data: doctors });
   }},
   { method: 'GET', pattern: '/api/v1/doctors/select', async handler(req, res) {
-    json(res, 200, doctors.map(d => ({ id: d.id, name: d.name })));
+    json(res, 200, { message: 'OK', data: doctors.map(d => ({ id: d.id, name: d.name })) });
   }},
 ];
 

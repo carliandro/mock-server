@@ -9,6 +9,11 @@ const routes = [
       refreshToken: 'mock-refresh-token-123',
     });
   }},
+  { method: 'POST', pattern: '/api/v1/auth/refresh', async handler(req, res) {
+    json(res, 200, {
+      token: 'eyJhbGciOiJIUzI1NiJ9.mock-refreshed-token',
+    });
+  }},
 ];
 
 module.exports = { routes };

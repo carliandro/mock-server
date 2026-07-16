@@ -39,7 +39,7 @@ if (-not $Integrated) {
   # 2. Angular dev server
   Set-Location $frontendDir
   Write-Host "[2/2] ng serve (mock auth)" -ForegroundColor Green
-  ng serve
+  ng serve --configuration development
 
   # Ao sair, tenta encerrar o mock server
   if ($mockProcess -and !$mockProcess.HasExited) {
