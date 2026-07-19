@@ -8,13 +8,13 @@ function today(offsetDays = 0) {
 }
 
 const appointments = [
-  { id: 1, patientId: 1, patientName: "João Batista de Souza", patientPhone: "(11) 98765-4321", cpf: "123.456.789-00", doctorId: 1, doctorName: "Dra. Maria da Costa", doctor: "Dra. Maria da Costa", duration: 30, appointmentDate: today(0), startTime: "09:00:00", endTime: "09:30:00", status: "AGENDADO", reason: "Consulta de rotina", notes: null, dentalOfficeId: 1 },
-  { id: 2, patientId: 2, patientName: "Maria Aparecida Santos", patientPhone: "(11) 97654-3210", cpf: "987.654.321-00", doctorId: 2, doctorName: "Dr. Carlos Oliveira", doctor: "Dr. Carlos Oliveira", duration: 45, appointmentDate: today(0), startTime: "10:00:00", endTime: "10:45:00", status: "CONFIRMADO", reason: "Canal", notes: null, dentalOfficeId: 1 },
-  { id: 3, patientId: 3, patientName: "Pedro Henrique Lima", patientPhone: "(11) 96543-2109", cpf: "456.789.123-00", doctorId: 3, doctorName: "Dra. Ana Silva", doctor: "Dra. Ana Silva", duration: 30, appointmentDate: today(0), startTime: "14:00:00", endTime: "14:30:00", status: "AGENDADO", reason: "Limpeza", notes: null, dentalOfficeId: 1 },
-  { id: 4, patientId: 4, patientName: "Ana Carolina Ferreira", patientPhone: "(11) 95432-1098", cpf: "789.123.456-00", doctorId: 4, doctorName: "Dr. Roberto Lima", doctor: "Dr. Roberto Lima", duration: 60, appointmentDate: today(0), startTime: "15:30:00", endTime: "16:30:00", status: "CONFIRMADO", reason: "Canal", notes: null, dentalOfficeId: 1 },
-  { id: 5, patientId: 1, patientName: "João Batista de Souza", patientPhone: "(11) 98765-4321", cpf: "123.456.789-00", doctorId: 5, doctorName: "Dra. Juliana Mendes", doctor: "Dra. Juliana Mendes", duration: 30, appointmentDate: today(1), startTime: "08:00:00", endTime: "08:30:00", status: "AGENDADO", reason: "Retorno", notes: null, dentalOfficeId: 1 },
-  { id: 6, patientId: 2, patientName: "Maria Aparecida Santos", patientPhone: "(11) 97654-3210", cpf: "987.654.321-00", doctorId: 2, doctorName: "Dr. Carlos Oliveira", doctor: "Dr. Carlos Oliveira", duration: 30, appointmentDate: today(2), startTime: "10:30:00", endTime: "11:00:00", status: "AGENDADO", reason: "Avaliação", notes: null, dentalOfficeId: 1 },
-  { id: 7, patientId: 3, patientName: "Pedro Henrique Lima", patientPhone: "(11) 96543-2109", cpf: "456.789.123-00", doctorId: 1, doctorName: "Dra. Maria da Costa", doctor: "Dra. Maria da Costa", duration: 45, appointmentDate: today(3), startTime: "11:00:00", endTime: "11:45:00", status: "AGENDADO", reason: "Clareamento", notes: null, dentalOfficeId: 1 },
+  { id: 1, patientId: 1, patientName: "João Batista de Souza", patientPhone: "(11) 98765-4321", cpf: "123.456.789-00", doctorId: 1, doctorName: "Dra. Maria da Costa", doctor: "Dra. Maria da Costa", duration: 30, appointmentDate: today(0), startTime: "09:00:00", endTime: "09:30:00", status: "agendado", reason: "Consulta de rotina", notes: null, dentalOfficeId: 1 },
+  { id: 2, patientId: 2, patientName: "Maria Aparecida Santos", patientPhone: "(11) 97654-3210", cpf: "987.654.321-00", doctorId: 2, doctorName: "Dr. Carlos Oliveira", doctor: "Dr. Carlos Oliveira", duration: 45, appointmentDate: today(0), startTime: "10:00:00", endTime: "10:45:00", status: "confirmado", reason: "Canal", notes: null, dentalOfficeId: 1 },
+  { id: 3, patientId: 3, patientName: "Pedro Henrique Lima", patientPhone: "(11) 96543-2109", cpf: "456.789.123-00", doctorId: 3, doctorName: "Dra. Ana Silva", doctor: "Dra. Ana Silva", duration: 30, appointmentDate: today(0), startTime: "14:00:00", endTime: "14:30:00", status: "agendado", reason: "Limpeza", notes: null, dentalOfficeId: 1 },
+  { id: 4, patientId: 4, patientName: "Ana Carolina Ferreira", patientPhone: "(11) 95432-1098", cpf: "789.123.456-00", doctorId: 4, doctorName: "Dr. Roberto Lima", doctor: "Dr. Roberto Lima", duration: 60, appointmentDate: today(0), startTime: "15:30:00", endTime: "16:30:00", status: "confirmado", reason: "Canal", notes: null, dentalOfficeId: 1 },
+  { id: 5, patientId: 1, patientName: "João Batista de Souza", patientPhone: "(11) 98765-4321", cpf: "123.456.789-00", doctorId: 5, doctorName: "Dra. Juliana Mendes", doctor: "Dra. Juliana Mendes", duration: 30, appointmentDate: today(1), startTime: "08:00:00", endTime: "08:30:00", status: "agendado", reason: "Retorno", notes: null, dentalOfficeId: 1 },
+  { id: 6, patientId: 2, patientName: "Maria Aparecida Santos", patientPhone: "(11) 97654-3210", cpf: "987.654.321-00", doctorId: 2, doctorName: "Dr. Carlos Oliveira", doctor: "Dr. Carlos Oliveira", duration: 30, appointmentDate: today(2), startTime: "10:30:00", endTime: "11:00:00", status: "agendado", reason: "Avaliação", notes: null, dentalOfficeId: 1 },
+  { id: 7, patientId: 3, patientName: "Pedro Henrique Lima", patientPhone: "(11) 96543-2109", cpf: "456.789.123-00", doctorId: 1, doctorName: "Dra. Maria da Costa", doctor: "Dra. Maria da Costa", duration: 45, appointmentDate: today(3), startTime: "11:00:00", endTime: "11:45:00", status: "agendado", reason: "Clareamento", notes: null, dentalOfficeId: 1 },
 ];
 let appointmentIdSeq = 100;
 
@@ -92,7 +92,7 @@ const routes = [
       duration: body.duration ?? 30,
       appointmentDate: body.appointmentDate ?? '',
       startTime: body.startTime ?? '',
-      status: body.status ?? 'AGENDADO',
+      status: (body.status ?? 'agendado').toLowerCase(),
       reason: body.reason ?? '',
       notes: body.notes ?? null,
       dentalOfficeId: body.dentalOfficeId ?? 1,
@@ -127,7 +127,7 @@ const routes = [
       duration: body.duration ?? prev.duration,
       appointmentDate: body.appointmentDate ?? prev.appointmentDate,
       startTime: body.startTime ?? prev.startTime,
-      status: body.status ?? prev.status,
+      status: (body.status ?? prev.status).toLowerCase(),
       reason: body.reason ?? prev.reason ?? '',
       notes: body.notes ?? prev.notes ?? null,
       dentalOfficeId: body.dentalOfficeId ?? prev.dentalOfficeId,
@@ -140,7 +140,7 @@ const routes = [
     const body = await readBody(req);
     const idx = appointments.findIndex(a => a.id === Number(params.id));
     if (idx === -1) { json(res, 404, { error: 'Not found' }); return; }
-    appointments[idx] = { ...appointments[idx], status: body.status };
+    appointments[idx] = { ...appointments[idx], status: (body.status ?? '').toLowerCase() };
     json(res, 200, appointments[idx]);
     broadcastSSE({ action: 'UPDATE', appointment: appointments[idx] });
   }},
