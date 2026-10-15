@@ -5,20 +5,36 @@ function today(offsetDays = 0) {
   // Data LOCAL (não UTC): toISOString após 21h no BR virava "amanhã".
   const d = new Date();
   d.setDate(d.getDate() + offsetDays);
+  return fmtLocal(d);
+}
+
+function fmtLocal(d) {
   const y = d.getFullYear();
   const m = String(d.getMonth() + 1).padStart(2, '0');
   const dd = String(d.getDate()).padStart(2, '0');
   return `${y}-${m}-${dd}`;
 }
 
+// Primeira data (a partir de hoje+offset) que cai nos dias de atendimento do dentista.
+function dateOnOrAfter(startOffsetDays, workdays) {
+  const d = new Date();
+  d.setDate(d.getDate() + startOffsetDays);
+  for (let i = 0; i < 14; i++) {
+    if (workdays.includes(d.getDay())) return fmtLocal(d);
+    d.setDate(d.getDate() + 1);
+  }
+  return fmtLocal(d);
+}
+
+// Seeds RESPEITAM o expediente de cada dentista (dias e horas do /doctors).
 const appointments = [
-  { id: 1, patientId: 1, patientName: "João Batista de Souza", patientPhone: "(11) 98765-4321", cpf: "123.456.789-00", doctorId: 1, doctorName: "Dra. Maria da Costa", doctor: "Dra. Maria da Costa", chairId: 1, chairName: "Cadeira 1", insuranceId: 1, insuranceName: "Uniodonto", duration: 30, appointmentDate: today(0), startTime: "09:00:00", endTime: "09:30:00", status: "agendado", reason: "Consulta de rotina", notes: null, dentalOfficeId: 1 },
-  { id: 2, patientId: 2, patientName: "Maria Aparecida Santos", patientPhone: "(11) 97654-3210", cpf: "987.654.321-00", doctorId: 2, doctorName: "Dr. Carlos Oliveira", doctor: "Dr. Carlos Oliveira", chairId: 2, chairName: "Cadeira 2", insuranceId: 2, insuranceName: "Amil Dental", duration: 45, appointmentDate: today(0), startTime: "10:00:00", endTime: "10:45:00", status: "confirmado", reason: "Canal", notes: null, dentalOfficeId: 1 },
-  { id: 3, patientId: 3, patientName: "Pedro Henrique Lima", patientPhone: "(11) 96543-2109", cpf: "456.789.123-00", doctorId: 3, doctorName: "Dra. Ana Silva", doctor: "Dra. Ana Silva", chairId: 3, chairName: "Cadeira 3", insuranceId: 3, insuranceName: "Bradesco Dental", duration: 30, appointmentDate: today(0), startTime: "14:00:00", endTime: "14:30:00", status: "agendado", reason: "Limpeza", notes: null, dentalOfficeId: 1 },
-  { id: 4, patientId: 4, patientName: "Ana Carolina Ferreira", patientPhone: "(11) 95432-1098", cpf: "789.123.456-00", doctorId: 4, doctorName: "Dr. Roberto Lima", doctor: "Dr. Roberto Lima", chairId: 4, chairName: "Cadeira 4", insuranceId: 4, insuranceName: "SulAmérica Odonto", duration: 60, appointmentDate: today(0), startTime: "15:30:00", endTime: "16:30:00", status: "confirmado", reason: "Canal", notes: null, dentalOfficeId: 1 },
-  { id: 5, patientId: 1, patientName: "João Batista de Souza", patientPhone: "(11) 98765-4321", cpf: "123.456.789-00", doctorId: 5, doctorName: "Dra. Juliana Mendes", doctor: "Dra. Juliana Mendes", chairId: 1, chairName: "Cadeira 1", insuranceId: 1, insuranceName: "Uniodonto", duration: 30, appointmentDate: today(1), startTime: "08:00:00", endTime: "08:30:00", status: "agendado", reason: "Retorno", notes: null, dentalOfficeId: 1 },
-  { id: 6, patientId: 2, patientName: "Maria Aparecida Santos", patientPhone: "(11) 97654-3210", cpf: "987.654.321-00", doctorId: 2, doctorName: "Dr. Carlos Oliveira", doctor: "Dr. Carlos Oliveira", chairId: 2, chairName: "Cadeira 2", insuranceId: 2, insuranceName: "Amil Dental", duration: 30, appointmentDate: today(2), startTime: "10:30:00", endTime: "11:00:00", status: "agendado", reason: "Avaliação", notes: null, dentalOfficeId: 1 },
-  { id: 7, patientId: 3, patientName: "Pedro Henrique Lima", patientPhone: "(11) 96543-2109", cpf: "456.789.123-00", doctorId: 1, doctorName: "Dra. Maria da Costa", doctor: "Dra. Maria da Costa", chairId: 3, chairName: "Cadeira 3", insuranceId: 3, insuranceName: "Bradesco Dental", duration: 45, appointmentDate: today(3), startTime: "11:00:00", endTime: "11:45:00", status: "agendado", reason: "Clareamento", notes: null, dentalOfficeId: 1 },
+  { id: 1, patientId: 1, patientName: "João Batista de Souza", patientPhone: "(11) 98765-4321", cpf: "123.456.789-00", doctorId: 1, doctorName: "Dra. Maria da Costa", doctor: "Dra. Maria da Costa", chairId: 1, chairName: "Cadeira 1", insuranceId: 1, insuranceName: "Uniodonto", duration: 30, appointmentDate: dateOnOrAfter(0, [1, 2, 3, 4, 5]), startTime: "09:00:00", endTime: "09:30:00", status: "agendado", reason: "Consulta de rotina", notes: null, dentalOfficeId: 1 },
+  { id: 2, patientId: 2, patientName: "Maria Aparecida Santos", patientPhone: "(11) 97654-3210", cpf: "987.654.321-00", doctorId: 2, doctorName: "Dr. Carlos Oliveira", doctor: "Dr. Carlos Oliveira", chairId: 2, chairName: "Cadeira 2", insuranceId: 2, insuranceName: "Amil Dental", duration: 45, appointmentDate: dateOnOrAfter(0, [1, 3, 5]), startTime: "10:00:00", endTime: "10:45:00", status: "confirmado", reason: "Canal", notes: null, dentalOfficeId: 1 },
+  { id: 3, patientId: 3, patientName: "Pedro Henrique Lima", patientPhone: "(11) 96543-2109", cpf: "456.789.123-00", doctorId: 3, doctorName: "Dra. Ana Silva", doctor: "Dra. Ana Silva", chairId: 3, chairName: "Cadeira 3", insuranceId: 3, insuranceName: "Bradesco Dental", duration: 30, appointmentDate: dateOnOrAfter(0, [2, 3, 4, 5, 6]), startTime: "10:00:00", endTime: "10:30:00", status: "agendado", reason: "Limpeza", notes: null, dentalOfficeId: 1 },
+  { id: 4, patientId: 4, patientName: "Ana Carolina Ferreira", patientPhone: "(11) 95432-1098", cpf: "789.123.456-00", doctorId: 4, doctorName: "Dr. Roberto Lima", doctor: "Dr. Roberto Lima", chairId: 4, chairName: "Cadeira 4", insuranceId: 4, insuranceName: "SulAmérica Odonto", duration: 60, appointmentDate: dateOnOrAfter(0, [1, 2, 3, 4, 5]), startTime: "15:30:00", endTime: "16:30:00", status: "confirmado", reason: "Canal", notes: null, dentalOfficeId: 1 },
+  { id: 5, patientId: 1, patientName: "João Batista de Souza", patientPhone: "(11) 98765-4321", cpf: "123.456.789-00", doctorId: 5, doctorName: "Dra. Juliana Mendes", doctor: "Dra. Juliana Mendes", chairId: 1, chairName: "Cadeira 1", insuranceId: 1, insuranceName: "Uniodonto", duration: 30, appointmentDate: dateOnOrAfter(1, [1, 2, 3, 4, 5, 6]), startTime: "08:00:00", endTime: "08:30:00", status: "agendado", reason: "Retorno", notes: null, dentalOfficeId: 1 },
+  { id: 6, patientId: 2, patientName: "Maria Aparecida Santos", patientPhone: "(11) 97654-3210", cpf: "987.654.321-00", doctorId: 2, doctorName: "Dr. Carlos Oliveira", doctor: "Dr. Carlos Oliveira", chairId: 2, chairName: "Cadeira 2", insuranceId: 2, insuranceName: "Amil Dental", duration: 30, appointmentDate: dateOnOrAfter(2, [1, 3, 5]), startTime: "10:30:00", endTime: "11:00:00", status: "agendado", reason: "Avaliação", notes: null, dentalOfficeId: 1 },
+  { id: 7, patientId: 3, patientName: "Pedro Henrique Lima", patientPhone: "(11) 96543-2109", cpf: "456.789.123-00", doctorId: 1, doctorName: "Dra. Maria da Costa", doctor: "Dra. Maria da Costa", chairId: 3, chairName: "Cadeira 3", insuranceId: 3, insuranceName: "Bradesco Dental", duration: 45, appointmentDate: dateOnOrAfter(2, [1, 2, 3, 4, 5]), startTime: "11:00:00", endTime: "11:45:00", status: "agendado", reason: "Clareamento", notes: null, dentalOfficeId: 1 },
 ];
 let appointmentIdSeq = 100;
 
