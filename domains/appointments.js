@@ -2,9 +2,13 @@ const { json, readBody } = require('../lib/helpers');
 const { broadcastSSE } = require('../lib/sse');
 
 function today(offsetDays = 0) {
+  // Data LOCAL (não UTC): toISOString após 21h no BR virava "amanhã".
   const d = new Date();
   d.setDate(d.getDate() + offsetDays);
-  return d.toISOString().split('T')[0];
+  const y = d.getFullYear();
+  const m = String(d.getMonth() + 1).padStart(2, '0');
+  const dd = String(d.getDate()).padStart(2, '0');
+  return `${y}-${m}-${dd}`;
 }
 
 const appointments = [
