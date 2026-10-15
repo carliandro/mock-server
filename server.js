@@ -14,6 +14,7 @@ const expenseRoutes = require('./domains/expenses').routes;
 const cashFlowRoutes = require('./domains/cash-flow').routes;
 const insurancePaymentRoutes = require('./domains/insurance-payments').routes;
 const miscRoutes = require('./domains/misc').routes;
+const closureRoutes = require('./domains/closures').routes;
 
 const routes = [
   ...authRoutes,
@@ -24,6 +25,7 @@ const routes = [
   ...expenseRoutes,
   ...cashFlowRoutes,
   ...insurancePaymentRoutes,
+  ...closureRoutes,
   ...miscRoutes,
 ];
 

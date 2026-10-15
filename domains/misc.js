@@ -17,6 +17,15 @@ const laboratories = [
 ];
 let laboratoryIdSeq = 100;
 
+// Convênios = fonte única (Ajustes → Convênios + Equipe + agenda leem daqui).
+const insurances = [
+  { id: 1, name: "Uniodonto", type: "Odontológico", registrationType: "pj", status: true },
+  { id: 2, name: "Amil Dental", type: "Odontológico", registrationType: "pj", status: true },
+  { id: 3, name: "Bradesco Dental", type: "Odontológico", registrationType: "pj", status: true },
+  { id: 4, name: "SulAmérica Odonto", type: "Odontológico", registrationType: "pj", status: true },
+];
+let insuranceIdSeq = 100;
+
 const routes = [
   // Cities
   { method: 'GET', pattern: '/api/v1/cities', async handler(req, res) {
@@ -33,10 +42,26 @@ const routes = [
 
   // Insurances
   { method: 'GET', pattern: '/api/v1/insurances/all', async handler(req, res) {
-    json(res, 200, { data: [
-      { id: 1, name: "Uniodonto", type: "Odontológico", status: true }, { id: 2, name: "Amil Dental", type: "Odontológico", status: true },
-      { id: 3, name: "Bradesco Dental", type: "Odontológico", status: true }, { id: 4, name: "SulAmérica Odonto", type: "Odontológico", status: true },
-    ]});
+    json(res, 200, { data: insurances });
+  }},
+  { method: 'POST', pattern: '/api/v1/insurances', async handler(req, res) {
+    const body = await readBody(req);
+    const newInsurance = { ...body, id: ++insuranceIdSeq, status: body.status ?? true };
+    insurances.push(newInsurance);
+    json(res, 201, { message: 'OK', data: newInsurance });
+  }},
+  { method: 'PUT', pattern: '/api/v1/insurances/:id', async handler(req, res, params) {
+    const body = await readBody(req);
+    const idx = insurances.findIndex(i => i.id === Number(params.id));
+    if (idx === -1) { json(res, 404, { message: 'Not found', data: null }); return; }
+    insurances[idx] = { ...insurances[idx], ...body, id: Number(params.id) };
+    json(res, 200, { message: 'OK', data: insurances[idx] });
+  }},
+  { method: 'DELETE', pattern: '/api/v1/insurances/:id', async handler(req, res, params) {
+    const idx = insurances.findIndex(i => i.id === Number(params.id));
+    if (idx === -1) { json(res, 404, { message: 'Not found', data: null }); return; }
+    const removed = insurances.splice(idx, 1)[0];
+    json(res, 200, { message: 'Convênio excluído', data: removed });
   }},
 
   // Laboratories
