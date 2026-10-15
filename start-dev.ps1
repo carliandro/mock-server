@@ -32,7 +32,7 @@ Write-Host "=====================================" -ForegroundColor Cyan
 
 if (-not $Integrated) {
   # 1. Mock server Node.js (API + SSE)
-  Write-Host "[1/2] Iniciando mock server Node.js (porta 8081)..." -ForegroundColor Green
+  Write-Host "[1/2] Iniciando mock server Node.js (porta 8082)..." -ForegroundColor Green
   $mockProcess = Start-Process -FilePath "node" -ArgumentList "$mockServerDir\server.js" -WindowStyle Normal -PassThru
   Start-Sleep -Seconds 2
 

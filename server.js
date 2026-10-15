@@ -2,13 +2,14 @@ const http = require('http');
 const { matchPath, extractParams, json } = require('./lib/helpers');
 const { broadcastSSE } = require('./lib/sse');
 
-const PORT = 8081;
+const PORT = 8082;
 const SSE_HEARTBEAT_MS = 15000;
 
 const authRoutes = require('./domains/auth').routes;
 const appointmentRoutes = require('./domains/appointments').routes;
 const patientRoutes = require('./domains/patients').routes;
 const doctorRoutes = require('./domains/doctors').routes;
+const chairRoutes = require('./domains/chairs').routes;
 const expenseRoutes = require('./domains/expenses').routes;
 const cashFlowRoutes = require('./domains/cash-flow').routes;
 const insurancePaymentRoutes = require('./domains/insurance-payments').routes;
@@ -19,6 +20,7 @@ const routes = [
   ...appointmentRoutes,
   ...patientRoutes,
   ...doctorRoutes,
+  ...chairRoutes,
   ...expenseRoutes,
   ...cashFlowRoutes,
   ...insurancePaymentRoutes,

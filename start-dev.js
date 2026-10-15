@@ -5,7 +5,7 @@ const net = require('net');
 const SCRIPT_DIR = __dirname;
 const ROOT = process.env.MOCK_SERVER_DIR || SCRIPT_DIR;
 const FRONTEND = process.env.ANGULAR_PROJECT_DIR || path.join(SCRIPT_DIR, '..', 'angular-sistema-odonto');
-const MOCK_PORT = 8081;
+const MOCK_PORT = 8082;
 
 function ensureEnvVar(name, value) {
   if (!process.env[name]) {
@@ -82,7 +82,7 @@ console.log('');
 
 console.log('Verificando portas...');
 killProcessOnPort(MOCK_PORT);
-killProcessOnPort(4200);
+killProcessOnPort(4500);
 
 setTimeout(() => {
   const mockServer = startProcess('MockServer', 'node', [
